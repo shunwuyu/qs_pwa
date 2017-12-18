@@ -1,27 +1,30 @@
-const cacheName = 'helloWorld';
+var cacheName = 'helloWorld';
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
-    .then(response => {
+    .then(function(response) {
       if (response) {
         return response;
       }
 
-      // 请求是一个流， 只能消一次
-      var requestToCache = event.request.clone();
-      return fetch(requestToCache).then(
-        response => {
-          if (!response || response.status !== 200) {
-            return response;
+      var fetchRequest = event.request.clone();
+
+      return fetch(fetchRequest).then(
+        function(fetchResponse) {
+          if(!fetchResponse || fetchResponse.status !== 200) {
+            return fetchResponse;
           }
 
-          let responseToCache = response.clone();
+          var responseToCache = fetchResponse.clone();
+
           caches.open(cacheName)
-            .then(cache => {
-              cache.put(requestToCache, responseToCache);
-            });
-          return response;
+          .then(function(cache) {
+            // console.log(event.request);
+            cache.put(event.request, responseToCache);
+          });
+
+          return fetchResponse;
         }
       );
     })
