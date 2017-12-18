@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Progressive Times - Online News</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Merriweather"/>
+  <link rel="stylesheet" href="./css/site.css" type="text/css"/>
+</head>
+<body>
+  <div id="header">
+    <img src="./images/newspaper.svg" id="logo">
+    <h1>Progressive Times</h1>
+    <h6>Latest News</h6>
+  </div>
+  <div id="latest"></div>
+  <hr>
+  <script async src="./js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(registration => {
+      })
+    }
+  </script>
+
+</body>
+</html>
