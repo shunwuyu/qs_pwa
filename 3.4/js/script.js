@@ -1,3 +1,3 @@
 if (window.console) {
-  console.log('script.js');
+  console.log('Hello Service Worker caching!');
 }
