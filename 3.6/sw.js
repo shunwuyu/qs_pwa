@@ -16,6 +16,13 @@ self.addEventListener('install', event => {
   );
 });
 
-// self.addEventListener('fetch', event => {
-//   event.respondWith()
-// })
+self.addEventListener('fetch', event => {
+  if (event.request.headers.get('save-data')) {
+    if (event.request.url.includes('fonts.googleapis.com')) {
+      event.respondWith(new Response('', {
+        status: 417,
+        statusText: 'Ignore Fonts to save data.'
+      }));
+    }
+  }
+});
